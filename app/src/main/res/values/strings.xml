@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">jwork-android</string>
+    <string name="register_now">Register Now</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="login">Login</string>
+    <string name="name">Name</string>
+    <string name="register">REGISTER</string>
+</resources>

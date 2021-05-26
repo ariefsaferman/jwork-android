@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EFE6E6"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/tvRegister"
+        android:layout_width="96dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="157dp"
+        android:layout_marginTop="12dp"
+        android:background="#EFE6E6"
+        android:text="@string/register_now"
+        android:textColor="#0101AF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
+    <EditText
+        android:id="@+id/editTextEmailAddress"
+        android:layout_width="337dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="343dp"
+        android:ems="10"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="333dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailAddress"
+        android:autofillHints="" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="338dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="13dp"
+        android:background="#EDE1E1"
+        android:backgroundTint="#D1C8C8"
+        android:foregroundTint="#151111"
+        android:text="@string/login"
+        android:textColor="#050505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+</androidx.constraintlayout.widget.ConstraintLayout>
