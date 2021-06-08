@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="0dp"
+    android:fillViewport="true">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="MissingConstraints">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/invoiceID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="152dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="153dp"
+                    android:text="Invoice ID"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/staticJobseekerName"
+                    android:layout_width="128dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="78dp"
+                    android:text="Jobseeker Name:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/name_jobseeker"
+                    android:layout_width="111dp"
+                    android:layout_height="21dp"
+                    android:layout_marginTop="76dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="Jobseeker Name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/invoice_date"
+                    android:layout_width="111dp"
+                    android:layout_height="21dp"
+                    android:layout_marginTop="108dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="Invoice Date "
+                    android:textAlignment="textEnd"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/payment_type"
+                    android:layout_width="111dp"
+                    android:layout_height="21dp"
+                    android:layout_marginTop="140dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="payment type"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/invoice_status"
+                    android:layout_width="111dp"
+                    android:layout_height="21dp"
+                    android:layout_marginTop="168dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="invoice status"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/code_referral"
+                    android:layout_width="111dp"
+                    android:layout_height="21dp"
+                    android:layout_marginTop="200dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="referral code"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/staticInvoiceDate"
+                    android:layout_width="129dp"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="12dp"
+                    android:text="Invoice Date: "
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/staticJobseekerName" />
+
+                <TextView
+                    android:id="@+id/staticPaymentType"
+                    android:layout_width="129dp"
+                    android:layout_height="19dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:text="Payment Type:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/staticInvoiceDate" />
+
+                <TextView
+                    android:id="@+id/staticInvoiceStatus"
+                    android:layout_width="129dp"
+                    android:layout_height="19dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="12dp"
+                    android:text="Invoice Status: "
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/staticPaymentType" />
+
+                <TextView
+                    android:id="@+id/staticReferralCode"
+                    android:layout_width="129dp"
+                    android:layout_height="19dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="12dp"
+                    android:text="Referral Code: "
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/staticInvoiceStatus" />
+
+                <TextView
+                    android:id="@+id/staticJobName"
+                    android:layout_width="129dp"
+                    android:layout_height="19dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="76dp"
+                    android:text="Job Name:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/staticInvoiceStatus" />
+
+                <TextView
+                    android:id="@+id/name_job"
+                    android:layout_width="129dp"
+                    android:layout_height="19dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="104dp"
+                    android:text="Job Name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/staticInvoiceStatus" />
+
+                <TextView
+                    android:id="@+id/static_total_fee"
+                    android:layout_width="129dp"
+                    android:layout_height="19dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="164dp"
+                    android:text="Total Fee: "
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/staticInvoiceStatus" />
+
+                <TextView
+                    android:id="@+id/fee_job"
+                    android:layout_width="129dp"
+                    android:layout_height="19dp"
+                    android:layout_marginStart="264dp"
+                    android:layout_marginTop="104dp"
+                    android:text="Fee"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/staticInvoiceStatus" />
+
+                <TextView
+                    android:id="@+id/fee_total"
+                    android:layout_width="129dp"
+                    android:layout_height="19dp"
+                    android:layout_marginStart="260dp"
+                    android:layout_marginTop="164dp"
+                    android:text="Total Fee"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/staticInvoiceStatus" />
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="129dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="47dp"
+                    android:backgroundTint="#C5EDF3"
+                    android:foregroundTint="#7FBFDC"
+                    android:text="CANCEL"
+                    android:textColor="#020202"
+                    app:layout_constraintEnd_toStartOf="@+id/btnFinish"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/static_total_fee"
+                    app:strokeColor="#B11212" />
+
+                <Button
+                    android:id="@+id/btnFinish"
+                    android:layout_width="131dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="47dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="44dp"
+                    android:backgroundTint="#C5EDF3"
+                    android:text="FINISH"
+                    android:textColor="#070707"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btnCancel"
+                    app:layout_constraintTop_toBottomOf="@+id/fee_total" />
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="385dp"
+                    android:layout_height="4dp"
+                    android:background="@color/black"
+                    tools:layout_editor_absoluteX="9dp"
+                    tools:layout_editor_absoluteY="333dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

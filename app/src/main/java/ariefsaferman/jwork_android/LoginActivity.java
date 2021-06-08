@@ -45,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
                             if (jsonObject != null) {
                                 Toast.makeText(LoginActivity.this, "Login Sucessful", Toast.LENGTH_LONG).show();
                                 Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+                                int jobseekerId = jsonObject.getInt("id");
+                                loginIntent.putExtra("jobseekerId", jobseekerId);
                                 startActivity(loginIntent);
                                 finish();
                             }

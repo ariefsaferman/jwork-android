@@ -3,7 +3,10 @@ package ariefsaferman.jwork_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<Recruiter> listRecruiter = new ArrayList<>();
     private ArrayList<Job> jobIdList = new ArrayList<>();
     private HashMap<Recruiter, ArrayList<Job>> childMapping = new HashMap<>();
+    private int jobseekerId;
 
     MainListAdapter listAdapter;
     ExpandableListView expandableListView;
@@ -32,6 +36,9 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button btnApplyJob = findViewById(R.id.btnApplyJob);
+        Intent intent = getIntent();
+        jobseekerId = intent.getIntExtra("jobseekerId", 0);
         expandableListView = (ExpandableListView) findViewById(R.id.lvExp);
 
         runOnUiThread(new Runnable()
@@ -40,6 +47,67 @@ public class MainActivity extends AppCompatActivity
             public void run()
             {
                 refreshList();
+            }
+        });
+
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener()
+        {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
+            {
+                Intent intent = new Intent(MainActivity.this, ApplyJobActivity.class);
+                Job selectedJob = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition);
+                jobseekerId = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition).getId();
+                int jobId = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition).getId();
+                String jobName = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition).getName();
+                String jobCategory = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition).getCategory();
+                double jobFee = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition).getFee();
+
+                intent.putExtra("jobseekerId", jobseekerId);
+                intent.putExtra("jobId", jobId);
+                intent.putExtra("jobName", jobName);
+                intent.putExtra("jobCategory", jobCategory);
+                intent.putExtra("jobFee", jobFee);
+
+
+                startActivity(intent);
+                return true;
+            }
+        });
+
+        btnApplyJob.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, SelesaiJobActivity.class);
+                intent.putExtra("jobseekerId", jobseekerId);
+                startActivity(intent);
+//                Response.Listener<String> responseListener = new Response.Listener<String>()
+//                {
+//                    @Override
+//                    public void onResponse(String response)
+//                    {
+//                        try {
+//                            JSONArray jsonResponse = new JSONArray(response);
+//                            if (jsonResponse != null) {
+//                                Intent intent = new Intent(MainActivity.this, SelesaiJobActivity.class);
+//                                for (int i = 0; i<jsonResponse.length(); i++) {
+//                                    JSONObject invoice = jsonResponse.getJSONObject(i);
+//                                    jobseekerId = invoice.getInt("jobseekerId");
+//                                }
+//                                intent.putExtra("jobseekerId", jobseekerId);
+//                                startActivity(intent);
+//                            }
+//                        } catch (JSONException e) {
+//                            Toast.makeText(MainActivity.this, "JSON FAILED", Toast.LENGTH_LONG).show();
+//                        }
+//                    }
+//                };
+//
+//                JobFetchRequest jobFetchRequest = new JobFetchRequest(String.valueOf(jobseekerId), responseListener);
+//                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+//                queue.add(jobFetchRequest);
             }
         });
     }
