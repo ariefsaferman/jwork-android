@@ -9,15 +9,16 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="484dp"
-        android:layout_height="344dp"
+        android:layout_width="509dp"
+        android:layout_height="362dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/pict_login"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/editTextEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.828" />
 
     <TextView
         android:id="@+id/tvRegister"
@@ -37,12 +38,15 @@
         android:layout_height="44dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="343dp"
+        android:autofillHints=""
+        android:drawableStart="@drawable/email"
+        android:drawableLeft="@drawable/email"
+        android:drawablePadding="5dp"
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextTextPassword"
@@ -53,6 +57,9 @@
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
+        android:drawableStart="@drawable/ic_baseline_lock_24"
+        android:drawableLeft="@drawable/ic_baseline_lock_24"
+        android:padding="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmailAddress"
         android:autofillHints="" />
@@ -66,10 +73,11 @@
         android:layout_marginEnd="38dp"
         android:layout_marginBottom="12dp"
         android:background="@drawable/button_bg"
-        android:backgroundTint="@null"
+        android:backgroundTint="#009EFD"
         android:text="@string/login"
         android:textAllCaps="false"
         android:textColor="#050505"
+        app:cornerRadius="50dp"
         app:layout_constraintBottom_toTopOf="@+id/tvRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
