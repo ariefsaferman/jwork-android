@@ -1,18 +1,24 @@
-package ariefsaferman.jwork_android;
+package ariefsaferman.jwork_android.activity;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,7 +27,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity
+import ariefsaferman.jwork_android.Job;
+import ariefsaferman.jwork_android.Location;
+import ariefsaferman.jwork_android.MainListAdapter;
+import ariefsaferman.jwork_android.request.MenuRequest;
+import ariefsaferman.jwork_android.R;
+import ariefsaferman.jwork_android.Recruiter;
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
     private ArrayList<Recruiter> listRecruiter = new ArrayList<>();
     private ArrayList<Job> jobIdList = new ArrayList<>();
@@ -34,12 +47,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.nav_activity_main);
 
+        NavigationView navigationView = findViewById(R.id.nav_view);
         Button btnApplyJob = findViewById(R.id.btnApplyJob);
         Intent intent = getIntent();
         jobseekerId = intent.getIntExtra("jobseekerId", 0);
         expandableListView = (ExpandableListView) findViewById(R.id.lvExp);
+
+        navigationView.setNavigationItemSelectedListener(this);
 
         runOnUiThread(new Runnable()
         {
@@ -57,7 +73,6 @@ public class MainActivity extends AppCompatActivity
             {
                 Intent intent = new Intent(MainActivity.this, ApplyJobActivity.class);
                 Job selectedJob = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition);
-                jobseekerId = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition).getId();
                 int jobId = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition).getId();
                 String jobName = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition).getName();
                 String jobCategory = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition).getCategory();
@@ -75,40 +90,10 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        btnApplyJob.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(MainActivity.this, SelesaiJobActivity.class);
-                intent.putExtra("jobseekerId", jobseekerId);
-                startActivity(intent);
-//                Response.Listener<String> responseListener = new Response.Listener<String>()
-//                {
-//                    @Override
-//                    public void onResponse(String response)
-//                    {
-//                        try {
-//                            JSONArray jsonResponse = new JSONArray(response);
-//                            if (jsonResponse != null) {
-//                                Intent intent = new Intent(MainActivity.this, SelesaiJobActivity.class);
-//                                for (int i = 0; i<jsonResponse.length(); i++) {
-//                                    JSONObject invoice = jsonResponse.getJSONObject(i);
-//                                    jobseekerId = invoice.getInt("jobseekerId");
-//                                }
-//                                intent.putExtra("jobseekerId", jobseekerId);
-//                                startActivity(intent);
-//                            }
-//                        } catch (JSONException e) {
-//                            Toast.makeText(MainActivity.this, "JSON FAILED", Toast.LENGTH_LONG).show();
-//                        }
-//                    }
-//                };
-//
-//                JobFetchRequest jobFetchRequest = new JobFetchRequest(String.valueOf(jobseekerId), responseListener);
-//                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-//                queue.add(jobFetchRequest);
-            }
+        btnApplyJob.setOnClickListener(v -> {
+            Intent intent1 = new Intent(MainActivity.this, SelesaiJobActivity.class);
+            intent1.putExtra("jobseekerId", jobseekerId);
+            startActivity(intent1);
         });
     }
 
@@ -180,5 +165,24 @@ public class MainActivity extends AppCompatActivity
         MenuRequest menuRequest = new MenuRequest(responseListener);
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         queue.add(menuRequest);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item)
+    {
+        SharedPreferences sharedPref = MainActivity.this.getSharedPreferences("JWORK_PREF", Context.MODE_PRIVATE);
+        switch (item.getItemId()) {
+            case R.id.nav_slideshow: {
+                Intent intent = new Intent(this, LoginActivity.class);
+                SharedPreferences.Editor edit = sharedPref.edit();
+                edit.putString("email", "");
+                edit.putString("password", "");
+                edit.apply();
+                startActivity(intent);
+                finish();
+                break;
+            }
+        }
+        return true;
     }
 }

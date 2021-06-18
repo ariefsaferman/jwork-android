@@ -1,4 +1,4 @@
-package ariefsaferman.jwork_android;
+package ariefsaferman.jwork_android.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +18,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import ariefsaferman.jwork_android.request.ApplyJobRequest;
+import ariefsaferman.jwork_android.request.BonusRequest;
+import ariefsaferman.jwork_android.R;
 
 public class ApplyJobActivity extends AppCompatActivity
 {
@@ -39,11 +43,13 @@ public class ApplyJobActivity extends AppCompatActivity
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
+
             jobseekerId = extras.getInt("jobseekerId");
             jobId = extras.getInt("jobId");
             jobName = extras.getString("jobName");
             jobCategory = extras.getString("jobCategory");
             jobFee = extras.getDouble("jobFee");
+            System.err.println("JobseekerId: " + jobseekerId);
         }
 
         TextView tvPesanan = findViewById(R.id.invoiceID);

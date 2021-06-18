@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EFE6E6"
-    tools:context=".LoginActivity">
+    tools:context=".activity.LoginActivity"
+    android:id="@+id/view_login">
 
     <TextView
         android:id="@+id/textView"
@@ -82,6 +83,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+
+    <CheckBox
+        android:id="@+id/remember_me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remember me!"
+        tools:layout_editor_absoluteX="141dp"
+        tools:layout_editor_absoluteY="438dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextTextPassword"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

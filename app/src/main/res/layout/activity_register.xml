@@ -4,52 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".activity.RegisterActivity"
+    android:background="@drawable/register"
+    android:id="@+id/view_register">
 
     <EditText
         android:id="@+id/etName"
+        android:drawableStart="@drawable/ic_baseline_person_24"
+        android:drawablePadding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="115dp"
         android:layout_marginTop="259dp"
         android:layout_marginEnd="86dp"
+        android:autofillHints=""
+        android:background="@drawable/input_register"
         android:ems="10"
         android:hint="@string/name"
         android:inputType="textPersonName"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="10dp"
+        android:textColor="#F4EDED"
+        android:textColorHint="#F4EEEE"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etEmail"
+        android:drawableStart="@drawable/email"
+        android:drawablePadding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="115dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="86dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="Email"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="10dp"
+        android:background="@drawable/input_register"
+        android:padding="5dp"
+        android:paddingLeft="10dp"
         android:inputType="textEmailAddress"
+        android:textColorHint="#F4EAEA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etName"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/etName" />
 
     <EditText
         android:id="@+id/etPassword"
+        android:drawableStart="@drawable/ic_baseline_lock_24"
+        android:drawablePadding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="117dp"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="84dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="Password"
+        android:background="@drawable/input_register"
+        android:padding="5dp"
+        android:paddingLeft="10dp"
         android:inputType="textPassword"
+        android:textColorHint="#FDFCFC"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
     <Button
         android:id="@+id/btnRegister"
@@ -58,9 +81,10 @@
         android:layout_marginStart="115dp"
         android:layout_marginTop="19dp"
         android:layout_marginEnd="82dp"
-        android:backgroundTint="#AEA9A9"
+        android:backgroundTint="#F4EBEB"
         android:text="@string/register"
         android:textColor="#0B0A0A"
+        app:cornerRadius="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />

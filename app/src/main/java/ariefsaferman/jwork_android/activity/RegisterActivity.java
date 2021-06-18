@@ -1,4 +1,4 @@
-package ariefsaferman.jwork_android;
+package ariefsaferman.jwork_android.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,17 +8,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URI;
-import java.net.URL;
+import ariefsaferman.jwork_android.R;
+import ariefsaferman.jwork_android.request.RegisterRequest;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -50,10 +49,14 @@ public class RegisterActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject != null) {
-                                Toast.makeText(RegisterActivity.this, "Register Sucessful", Toast.LENGTH_LONG).show();
+//                                Toast.makeText(RegisterActivity.this, "Register Sucessful", Toast.LENGTH_LONG).show();
+                                Snackbar.make(findViewById(R.id.view_register), "Register Success ", Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
                             }
                         } catch (JSONException e) {
-                            Toast.makeText(RegisterActivity.this, "Register Failed", Toast.LENGTH_LONG).show();
+//                            Toast.makeText(RegisterActivity.this, "Register Failed", Toast.LENGTH_LONG).show();
+                            Snackbar.make(findViewById(R.id.view_register), "Register Failed ", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
                         }
                     }
                 };

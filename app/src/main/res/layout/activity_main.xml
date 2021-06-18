@@ -1,21 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f4f4f4"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#4A5FE4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
     <ExpandableListView
         android:id="@+id/lvExp"
-        android:layout_width="match_parent"
-        android:layout_height="657dp">
-    </ExpandableListView>
+        android:layout_width="410dp"
+        android:layout_height="518dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="34dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnApplyJob"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ExpandableListView>
 
     <Button
         android:id="@+id/btnApplyJob"
         android:layout_width="216dp"
         android:layout_height="80dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="150dp"
-        android:text="Applied Job" />
-</LinearLayout>
+        android:layout_marginStart="98dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="97dp"
+        android:text="Applied Job"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lvExp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ariefsaferman.jwork_android">
+    package="ariefsaferman.jwork_android" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,12 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Jworkandroid"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".SelesaiJobActivity"></activity>
-        <activity android:name=".ApplyJobActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity">
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".drawer_activity"
+            android:label="@string/title_activity_drawer_activity"
+            android:theme="@style/Theme.Jworkandroid.NoActionBar" >
+        </activity>
+        <activity android:name=".activity.SelesaiJobActivity" />
+        <activity android:name=".activity.ApplyJobActivity" />
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

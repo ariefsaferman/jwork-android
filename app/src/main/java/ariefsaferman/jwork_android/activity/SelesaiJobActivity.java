@@ -1,4 +1,4 @@
-package ariefsaferman.jwork_android;
+package ariefsaferman.jwork_android.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +16,11 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import ariefsaferman.jwork_android.request.JobBatalRequest;
+import ariefsaferman.jwork_android.request.JobFetchRequest;
+import ariefsaferman.jwork_android.request.JobSelesaiRequest;
+import ariefsaferman.jwork_android.R;
 
 public class SelesaiJobActivity extends AppCompatActivity
 {
