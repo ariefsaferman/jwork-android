@@ -6,7 +6,13 @@ import com.android.volley.toolbox.StringRequest;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ *
+ *
+ * @author Arief Saferman
+ * @version  18 Juni 2021
+ *
+ */
 public class JobBatalRequest extends StringRequest
 {
     private static final String URL = "http://10.0.2.2:8080/invoice/invoiceStatus/";

@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="0dp"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:id="@+id/view_selesai">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

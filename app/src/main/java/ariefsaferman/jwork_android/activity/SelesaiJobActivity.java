@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,11 +23,19 @@ import ariefsaferman.jwork_android.request.JobFetchRequest;
 import ariefsaferman.jwork_android.request.JobSelesaiRequest;
 import ariefsaferman.jwork_android.R;
 
+/**
+ *
+ *
+ * @author Arief Saferman
+ * @version  18 Juni 2021
+ *
+ */
 public class SelesaiJobActivity extends AppCompatActivity
 {
     private int jobseekerId;
     private TextView tvJobseekerName, tvInvoiceDate, tvPaymentType, tvInvoiceStatus, tvReferralCode, tvJobName, tvFeeJob, tvTotalFee;
     private Button btnCancel, btnFinished;
+    private int invoiceId;
 
 
     @Override
@@ -76,18 +85,23 @@ public class SelesaiJobActivity extends AppCompatActivity
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject != null) {
-                                Toast.makeText(SelesaiJobActivity.this, "Cancel Apply", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(SelesaiJobActivity.this, JobBatalRequest.class);
-                                intent.putExtra("jobseekerId", jobseekerId);
-                                startActivity(intent);
+                                String invoiceStatus = jsonObject.getString("status");
+                                tvInvoiceStatus.setText(invoiceStatus);
+
+                                Snackbar.make(findViewById(R.id.view_selesai), "Cancel is Success", Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
+                                btnCancel.setEnabled(false);
+                                btnFinished.setEnabled(false);
                             }
                         } catch (JSONException e) {
-                            Toast.makeText(SelesaiJobActivity.this, "Cancel Apply Failed", Toast.LENGTH_LONG).show();
+                            Snackbar.make(findViewById(R.id.view_selesai), "Cancel is Failed", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
                         }
                     }
                 };
+
                 //untuk melakukan request JobBatalRequest
-                JobBatalRequest jobBatalRequest = new JobBatalRequest(String.valueOf(jobseekerId), responseListener);
+                JobBatalRequest jobBatalRequest = new JobBatalRequest(String.valueOf(invoiceId), responseListener);
                 RequestQueue queue = Volley.newRequestQueue(SelesaiJobActivity.this);
                 queue.add(jobBatalRequest);
             }
@@ -107,18 +121,22 @@ public class SelesaiJobActivity extends AppCompatActivity
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject != null) {
-                                Toast.makeText(SelesaiJobActivity.this, "Finish Apply is success", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(SelesaiJobActivity.this, JobSelesaiRequest.class);
-                                intent.putExtra("jobseekerId", jobseekerId);
-                                startActivity(intent);
+                                String invoiceStatus = jsonObject.getString("status");
+                                tvInvoiceStatus.setText(invoiceStatus);
+
+                                Snackbar.make(findViewById(R.id.view_selesai), "Finish Apply is success", Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
+                                btnFinished.setEnabled(false);
+                                btnCancel.setEnabled(false);
                             }
                         } catch (JSONException e) {
-                            Toast.makeText(SelesaiJobActivity.this, "Finish Apply is failed", Toast.LENGTH_LONG).show();
+                            Snackbar.make(findViewById(R.id.view_selesai), "Finish Apply is failed", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
                         }
                     }
                 };
                 //Melakukan request JobSelesaiRequest
-                JobSelesaiRequest jobSelesaiRequest = new JobSelesaiRequest(String.valueOf(jobseekerId), responseListener);
+                JobSelesaiRequest jobSelesaiRequest = new JobSelesaiRequest(String.valueOf(invoiceId), responseListener);
                 RequestQueue queue = Volley.newRequestQueue(SelesaiJobActivity.this);
                 queue.add(jobSelesaiRequest);
             }
@@ -142,6 +160,8 @@ public class SelesaiJobActivity extends AppCompatActivity
                             String jobseekerName = invoice.getJSONObject("jobseeker").getString("name");
                             tvJobseekerName.setText(jobseekerName);
 
+                            invoiceId = invoice.getInt("id");
+
                             //Object Invoice Date
                             String date = invoice.getString("date");
                             tvInvoiceDate.setText(date);
@@ -152,7 +172,7 @@ public class SelesaiJobActivity extends AppCompatActivity
 
                             //Invoice Status
                             String invoiceStatus = invoice.getString("status");
-                            tvPaymentType.setText(invoiceStatus);
+                            tvInvoiceStatus.setText(invoiceStatus);
 
                             //referral Code
                             if (paymentType.equals("EwalletPayment")){
@@ -195,10 +215,7 @@ public class SelesaiJobActivity extends AppCompatActivity
 
                     }
                 } catch (JSONException e) {
-                    Intent intent = new Intent(SelesaiJobActivity.this, MainActivity.class);
-                    intent.putExtra("jobseekerId", jobseekerId);
-                    startActivity(intent);
-
+                    finish();
                 }
 
             }

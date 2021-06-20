@@ -24,6 +24,13 @@ import org.json.JSONObject;
 import ariefsaferman.jwork_android.request.LoginRequest;
 import ariefsaferman.jwork_android.R;
 
+/**
+ *
+ *
+ * @author Arief Saferman
+ * @version  18 Juni 2021
+ *
+ */
 public class LoginActivity extends AppCompatActivity {
 
     @Override

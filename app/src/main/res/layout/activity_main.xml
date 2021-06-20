@@ -14,9 +14,21 @@
         android:background="#4A5FE4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        />
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:layout_width="51dp"
+        android:layout_height="52dp"
+        android:src="@drawable/ic_baseline_menu_24"
+        android:layout_marginStart="10dp"
+        android:tint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/my_toolbar"
+        android:id="@+id/menu_drawer"
+        android:clickable="true"></ImageView>
 
     <ExpandableListView
         android:id="@+id/lvExp"

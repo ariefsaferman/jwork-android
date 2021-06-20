@@ -19,6 +19,13 @@ import org.json.JSONObject;
 import ariefsaferman.jwork_android.R;
 import ariefsaferman.jwork_android.request.RegisterRequest;
 
+/**
+ *
+ *
+ * @author Arief Saferman
+ * @version  18 Juni 2021
+ *
+ */
 public class RegisterActivity extends AppCompatActivity {
 
     @Override
@@ -55,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
 //                            Toast.makeText(RegisterActivity.this, "Register Failed", Toast.LENGTH_LONG).show();
-                            Snackbar.make(findViewById(R.id.view_register), "Register Failed ", Snackbar.LENGTH_LONG)
+                            Snackbar.make(findViewById(R.id.view_register), "Register Failed please check again your email and password", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                         }
                     }

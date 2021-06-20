@@ -3,6 +3,7 @@ package ariefsaferman.jwork_android.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -34,8 +36,16 @@ import ariefsaferman.jwork_android.request.MenuRequest;
 import ariefsaferman.jwork_android.R;
 import ariefsaferman.jwork_android.Recruiter;
 
+/**
+ *
+ *
+ * @author Arief Saferman
+ * @version  18 Juni 2021
+ *
+ */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
+    // Membuat variabel global
     private ArrayList<Recruiter> listRecruiter = new ArrayList<>();
     private ArrayList<Job> jobIdList = new ArrayList<>();
     private HashMap<Recruiter, ArrayList<Job>> childMapping = new HashMap<>();
@@ -49,7 +59,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_activity_main);
 
+        // Membuat objek untuk navigation view drawer
         NavigationView navigationView = findViewById(R.id.nav_view);
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        ImageView imageView = findViewById(R.id.menu_drawer);
+
+        //membuat variabel button dan menerima jobseekerId dari login activity
         Button btnApplyJob = findViewById(R.id.btnApplyJob);
         Intent intent = getIntent();
         jobseekerId = intent.getIntExtra("jobseekerId", 0);
@@ -57,6 +72,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView.setNavigationItemSelectedListener(this);
 
+        // set drawer di sebelah kiri
+        imageView.setOnClickListener(v -> {
+            drawerLayout.openDrawer(GravityCompat.START);
+        });
         runOnUiThread(new Runnable()
         {
             @Override
@@ -66,30 +85,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener()
-        {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
-            {
-                Intent intent = new Intent(MainActivity.this, ApplyJobActivity.class);
-                Job selectedJob = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition);
-                int jobId = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition).getId();
-                String jobName = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition).getName();
-                String jobCategory = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition).getCategory();
-                double jobFee = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition).getFee();
+        // Membuat expandable list untuk listing job dan recruiter
+        expandableListView.setOnChildClickListener((parent, v, groupPosition, childPosition, id) -> {
+            Intent intent12 = new Intent(MainActivity.this, ApplyJobActivity.class);
+            Job selectedJob = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition);
+            int jobId = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition).getId();
+            String jobName = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition).getName();
+            String jobCategory = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition).getCategory();
+            double jobFee = childMapping.get(listRecruiter.get(groupPosition)).get(childPosition).getFee();
 
-                intent.putExtra("jobseekerId", jobseekerId);
-                intent.putExtra("jobId", jobId);
-                intent.putExtra("jobName", jobName);
-                intent.putExtra("jobCategory", jobCategory);
-                intent.putExtra("jobFee", jobFee);
+            intent12.putExtra("jobseekerId", jobseekerId);
+            intent12.putExtra("jobId", jobId);
+            intent12.putExtra("jobName", jobName);
+            intent12.putExtra("jobCategory", jobCategory);
+            intent12.putExtra("jobFee", jobFee);
 
 
-                startActivity(intent);
-                return true;
-            }
+            startActivity(intent12);
+            return true;
         });
 
+        // Mengirim jobseekerId apabila selesai apply
         btnApplyJob.setOnClickListener(v -> {
             Intent intent1 = new Intent(MainActivity.this, SelesaiJobActivity.class);
             intent1.putExtra("jobseekerId", jobseekerId);
@@ -98,68 +114,65 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     protected void refreshList(){
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONArray jsonResponse = new JSONArray(response);
-                    if (jsonResponse != null) {
-                        for (int i = 0; i < jsonResponse.length(); i++){
-                            JSONObject job = jsonResponse.getJSONObject(i);
-                            JSONObject recruiter = job.getJSONObject("recruiter");
-                            JSONObject location = recruiter.getJSONObject("location");
+        Response.Listener<String> responseListener = response -> {
+            try {
+                JSONArray jsonResponse = new JSONArray(response);
+                if (jsonResponse != null) {
+                    for (int i = 0; i < jsonResponse.length(); i++){
+                        JSONObject job = jsonResponse.getJSONObject(i);
+                        JSONObject recruiter = job.getJSONObject("recruiter");
+                        JSONObject location = recruiter.getJSONObject("location");
 
-                            String city = location.getString("city");
-                            String province = location.getString("province");
-                            String description = location.getString("description");
+                        String city = location.getString("city");
+                        String province = location.getString("province");
+                        String description = location.getString("description");
 
-                            Location location1 = new Location(province, city, description);
+                        Location location1 = new Location(province, city, description);
 
-                            int recruiterId = recruiter.getInt("id");
-                            String recruiterName = recruiter.getString("name");
-                            String recruiterEmail = recruiter.getString("email");
-                            String recruiterPhoneNumber = recruiter.getString("phoneNumber");
+                        int recruiterId = recruiter.getInt("id");
+                        String recruiterName = recruiter.getString("name");
+                        String recruiterEmail = recruiter.getString("email");
+                        String recruiterPhoneNumber = recruiter.getString("phoneNumber");
 
-                            Recruiter newRecruiter = new Recruiter(recruiterId, recruiterName, recruiterEmail, recruiterPhoneNumber, location1);
-                            if (listRecruiter.size() > 0) {
-                                boolean success = true;
-                                for (Recruiter rec : listRecruiter)
-                                    if (rec.getId() == newRecruiter.getId())
-                                        success = false;
-                                if (success) {
-                                    listRecruiter.add(newRecruiter);
-                                }
-                            } else {
+                        Recruiter newRecruiter = new Recruiter(recruiterId, recruiterName, recruiterEmail, recruiterPhoneNumber, location1);
+                        if (listRecruiter.size() > 0) {
+                            boolean success = true;
+                            for (Recruiter rec : listRecruiter)
+                                if (rec.getId() == newRecruiter.getId())
+                                    success = false;
+                            if (success) {
                                 listRecruiter.add(newRecruiter);
                             }
-
-                            int jobId = job.getInt("id");
-                            int jobFee = job.getInt("fee");
-                            String jobName = job.getString("name");
-                            String jobCategory = job.getString("category");
-
-                            Job newJob = new Job(jobId, jobFee, jobName, jobCategory, newRecruiter);
-                            jobIdList.add(newJob);
+                        } else {
+                            listRecruiter.add(newRecruiter);
                         }
 
-                        for (Recruiter rec : listRecruiter) {
-                            ArrayList<Job> temp = new ArrayList<>();
-                            for (Job jobs : jobIdList) {
-                                if (jobs.getRecruiter().getName().equals(rec.getName()) ||
-                                        jobs.getRecruiter().getEmail().equals(rec.getEmail()) ||
-                                        jobs.getRecruiter().getPhoneNumber().equals(rec.getPhoneNumber())) {
-                                    temp.add(jobs);
-                                }
-                            }
-                            childMapping.put(rec, temp);
-                        }
+                        int jobId = job.getInt("id");
+                        int jobFee = job.getInt("fee");
+                        String jobName = job.getString("name");
+                        String jobCategory = job.getString("category");
 
-                        listAdapter = new MainListAdapter(MainActivity.this, listRecruiter, childMapping);
-                        expandableListView.setAdapter(listAdapter);
+                        Job newJob = new Job(jobId, jobFee, jobName, jobCategory, newRecruiter);
+                        jobIdList.add(newJob);
                     }
-                } catch (JSONException e) {
-                    System.out.println(e.getMessage());
+
+                    for (Recruiter rec : listRecruiter) {
+                        ArrayList<Job> temp = new ArrayList<>();
+                        for (Job jobs : jobIdList) {
+                            if (jobs.getRecruiter().getName().equals(rec.getName()) ||
+                                    jobs.getRecruiter().getEmail().equals(rec.getEmail()) ||
+                                    jobs.getRecruiter().getPhoneNumber().equals(rec.getPhoneNumber())) {
+                                temp.add(jobs);
+                            }
+                        }
+                        childMapping.put(rec, temp);
+                    }
+
+                    listAdapter = new MainListAdapter(MainActivity.this, listRecruiter, childMapping);
+                    expandableListView.setAdapter(listAdapter);
                 }
+            } catch (JSONException e) {
+                System.out.println(e.getMessage());
             }
         };
         MenuRequest menuRequest = new MenuRequest(responseListener);
